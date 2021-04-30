@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>微信扫码登记</title>
+    <script src="/js/jquery.min.js"></script>
+    <style>
+        body{
+            text-align: center;
+            padding: 0;
+        }
+        .main{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        div {
+            display: block;
+        }
+        .scan {
+            font-size: 50px;
+        }
+        img {
+            display: inline-block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="scan">微信扫码登记</div>
+        <div class="pic"><img src="#" id="images"/></div>
+    </div>
+</body>
+<script>
+    var c = self.setInterval("update()",55000);
+    function update() {
+        $.ajax({
+            url:"http://ghjun.ngrok2.xiaomiqiu.cn/qrcode/scan",
+            success: function (result) {
+                $("#images").attr("src",result);
+            }
+        });
+    }
+</script>
+</html>
